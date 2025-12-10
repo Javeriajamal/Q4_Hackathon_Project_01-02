@@ -1,0 +1,135 @@
+---
+sidebar_position: 2
+title: "Control Systems and Actuation"
+---
+
+# Control Systems and Actuation
+
+## Learning Objectives
+- Understand the control architectures used in humanoid robotics
+- Explore different actuation technologies and their applications
+- Analyze feedback control systems for stable humanoid operation
+
+## Introduction
+The control systems of humanoid robots represent one of the most complex aspects of their design, requiring sophisticated algorithms to coordinate multiple degrees of freedom while maintaining balance and achieving desired tasks. These systems must handle the dynamic nature of bipedal locomotion, environmental interactions, and real-time sensory feedback.
+
+## Main Content
+
+### Control Architecture
+
+#### Hierarchical Control Structure
+Humanoid robots typically employ multiple levels of control:
+
+**High-Level Planning**
+- Task-level planning and sequencing
+- Path planning for navigation
+- Behavioral decision-making
+- Integration with AI systems
+
+**Mid-Level Coordination**
+- Whole-body motion planning
+- Balance and posture control
+- Gait pattern generation
+- Multi-objective optimization
+
+**Low-Level Control**
+- Joint-level servo control
+- Hardware interface management
+- Real-time safety monitoring
+- Direct motor command execution
+
+### Balance Control
+
+#### Zero Moment Point (ZMP) Control
+- Mathematical model for dynamic balance
+- Ensures no moment about any horizontal axis
+- Foundation for stable walking pattern generation
+- Computationally efficient for real-time control
+
+#### Center of Mass (CoM) Control
+- Direct control of robot's center of mass
+- Integration with ZMP for enhanced stability
+- Consideration of angular momentum
+- Applications in dynamic movements
+
+#### Capture Point Control
+- Advanced approach for dynamic balance
+- Predicts where to place feet for balance recovery
+- Enables more dynamic and human-like movement
+- Used in state-of-the-art humanoid robots
+
+### Actuation Technologies
+
+#### Servo Motor Control
+- Position, velocity, and torque control modes
+- PID control for precise positioning
+- Advanced control algorithms (LQR, MPC)
+- Communication protocols (CAN, EtherCAT)
+
+#### Variable Stiffness Actuators
+- Adjustable compliance for safe interaction
+- Energy efficiency through variable impedance
+- Human-like movement characteristics
+- Complex control requirements
+
+#### Series Elastic Actuators
+- Built-in compliance for safety and energy efficiency
+- Force control capabilities
+- Disturbance rejection properties
+- Applications in human-safe robotics
+
+### Walking Pattern Generation
+
+#### Inverted Pendulum Models
+- Linear Inverted Pendulum Model (LIPM)
+- Enhanced models with angular momentum
+- Preview control for stable walking
+- Online pattern generation
+
+#### Footstep Planning
+- Terrain analysis and footstep selection
+- Dynamic balance constraint satisfaction
+- Obstacle avoidance integration
+- Real-time replanning capabilities
+
+### Sensory Feedback Integration
+
+#### State Estimation
+- Sensor fusion for accurate state information
+- Kalman filtering for noise reduction
+- Real-time estimation of CoM, ZMP
+- Handling of sensor failures and uncertainties
+
+#### Force Control
+- Environment interaction management
+- Compliance control for safe operation
+- Impedance control for variable stiffness
+- Tactile feedback integration
+
+### Real-Time Control Considerations
+
+#### Timing Constraints
+- Control loop frequencies (typically 200Hz+)
+- Communication delays and jitter management
+- Predictable real-time execution
+- Safety-critical system requirements
+
+#### Computational Optimization
+- Efficient algorithms for real-time execution
+- Parallel processing utilization
+- Model simplification without performance loss
+- Hardware acceleration when possible
+
+## Practical Examples
+The WALK-MAN robot demonstrates advanced control systems with its ability to perform complex manipulation tasks while maintaining balance. The HRP-4 humanoid robot by AIST shows sophisticated walking control with its ability to walk on different surfaces. Modern control approaches are also implemented in research platforms like the DRC-HUBO robot.
+
+## Key Takeaways
+- Hierarchical control structures enable complex humanoid behavior
+- Balance control is fundamental for stable operation
+- Advanced actuation technologies enable human-like movement
+- Real-time constraints require optimized control algorithms
+
+## Further Resources
+- "Humanoid Robotics: A Reference" by Ambarish Goswami
+- IEEE Transactions on Robotics special issues on humanoid control
+- Control system documentation for popular humanoid platforms

@@ -1,0 +1,138 @@
+# API Contract: Waitlist Functionality
+# Note: This is a client-side contract using localStorage
+
+openapi: 3.0.0
+info:
+  title: Waitlist API for Book Website
+  version: 1.0.0
+  description: Client-side API for managing waitlist entries using localStorage
+
+paths:
+  /waitlist:
+    post:
+      summary: Add a new entry to the waitlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+              properties:
+                name:
+                  type: string
+                  description: User's full name
+                  example: "John Doe"
+                email:
+                  type: string
+                  description: User's email address
+                  format: email
+                  example: "john.doe@example.com"
+      responses:
+        '200':
+          description: Successfully added to waitlist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Successfully added to waitlist"
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: string
+                    example: "Invalid email format"
+    get:
+      summary: Get all waitlist entries (for client-side use)
+      responses:
+        '200':
+          description: List of waitlist entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: "John Doe"
+                    email:
+                      type: string
+                      format: email
+                      example: "john.doe@example.com"
+                    timestamp:
+                      type: string
+                      format: date-time
+                      example: "2025-12-09T10:00:00Z"
+
+  /preferences:
+    get:
+      summary: Get user preferences
+      responses:
+        '200':
+          description: User preferences
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  theme:
+                    type: string
+                    enum: [light, dark]
+                    example: "light"
+                  fontSize:
+                    type: string
+                    enum: [small, medium, large]
+                    example: "medium"
+                  lastReadChapter:
+                    type: string
+                    example: "chapter-1"
+                  lastReadPosition:
+                    type: number
+                    example: 75
+    put:
+      summary: Update user preferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                theme:
+                  type: string
+                  enum: [light, dark]
+                fontSize:
+                  type: string
+                  enum: [small, medium, large]
+                lastReadChapter:
+                  type: string
+                lastReadPosition:
+                  type: number
+      responses:
+        '200':
+          description: Preferences updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true

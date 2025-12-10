@@ -1,0 +1,36 @@
+.aboutPage {
+  padding: 2rem 0;
+}
+
+.authorSection {
+  margin: 2rem 0;
+  padding: 2rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.authorPhoto {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.visionSection {
+  padding: 2rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.missionSection {
+  padding: 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .authorSection {
+    text-align: center;
+  }
+
+  .authorPhoto {
+    max-width: 200px;
+    margin: 0 auto 1rem auto;
+  }
+}

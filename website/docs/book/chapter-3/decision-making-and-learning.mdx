@@ -1,0 +1,147 @@
+---
+sidebar_position: 2
+title: "Decision Making and Learning"
+---
+
+# Decision Making and Learning
+
+## Learning Objectives
+- Understand AI algorithms for humanoid robot decision making
+- Explore machine learning approaches for robotic behavior
+- Analyze the integration of learning with real-time control
+
+## Introduction
+Decision making and learning form the cognitive core of humanoid robots, enabling them to adapt to new situations, improve their performance over time, and make intelligent choices based on sensory input and goals. These systems bridge the gap between perception and action, allowing robots to operate autonomously in complex, dynamic environments.
+
+## Main Content
+
+### Planning and Decision Making
+
+#### Motion Planning
+Algorithms for generating robot movement trajectories:
+
+**Path Planning**
+- A* and D* algorithms for optimal pathfinding
+- RRT (Rapidly-exploring Random Trees) for high-dimensional spaces
+- Visibility graphs for navigation in known environments
+- Dynamic path planning for moving obstacles
+
+**Trajectory Optimization**
+- Model Predictive Control (MPC) for dynamic systems
+- Quadratic programming for optimal control
+- Real-time optimization for dynamic environments
+- Multi-objective optimization for competing goals
+
+#### Task Planning
+- Hierarchical task networks (HTN) for complex tasks
+- STRIPS-based planning for symbolic actions
+- Partial order planning for flexible execution
+- Contingency planning for uncertain environments
+
+#### Behavior Selection
+- Finite state machines for behavior switching
+- Behavior trees for complex action selection
+- Utility-based decision making
+- Multi-criteria decision analysis
+
+### Machine Learning Approaches
+
+#### Supervised Learning
+- Classification for object recognition
+- Regression for sensor calibration
+- Deep learning for perception tasks
+- Transfer learning for new domains
+
+#### Reinforcement Learning
+- Markov Decision Processes (MDPs) for sequential decisions
+- Q-learning for discrete action spaces
+- Deep Q-Networks (DQN) for complex state spaces
+- Policy gradient methods for continuous control
+
+#### Imitation Learning
+- Learning from demonstration (LfD)
+- Behavioral cloning for skill acquisition
+- Inverse reinforcement learning for reward shaping
+- One-shot learning for rapid skill transfer
+
+### Real-Time Decision Making
+
+#### Online Learning
+- Continuous adaptation to changing environments
+- Incremental learning algorithms
+- Catastrophic forgetting prevention
+- Balancing exploration and exploitation
+
+#### Uncertainty Management
+- Probabilistic reasoning under uncertainty
+- Bayesian inference for belief updating
+- Monte Carlo methods for complex distributions
+- Decision making with confidence bounds
+
+#### Multi-Agent Coordination
+- Distributed decision making
+- Communication protocols for coordination
+- Consensus algorithms for group decisions
+- Game theory for multi-agent interactions
+
+### Learning from Interaction
+
+#### Physical Interaction Learning
+- Learning through environmental interaction
+- Trial-and-error learning for manipulation
+- Physical simulation for safe learning
+- Transfer from simulation to reality (sim-to-real)
+
+#### Human-Robot Interaction Learning
+- Learning from human feedback
+- Social learning mechanisms
+- Collaborative learning scenarios
+- Adaptive interfaces based on user preferences
+
+#### Skill Transfer and Generalization
+- Transfer learning between tasks
+- Domain adaptation for new environments
+- Few-shot learning for rapid adaptation
+- Meta-learning for learning to learn
+
+### Cognitive Architectures
+
+#### Integrated Systems
+- Perception-action loops with learning
+- Memory systems for experience storage
+- Attention mechanisms for focus
+- Planning-execution-monitoring cycles
+
+#### Long-Term Learning
+- Lifelong learning systems
+- Experience replay mechanisms
+- Knowledge transfer between tasks
+- Forgetting mechanisms for memory management
+
+### Safety and Ethical Considerations
+
+#### Safe Learning
+- Safe exploration algorithms
+- Constrained optimization for safety
+- Formal verification of learned policies
+- Human oversight in learning systems
+
+#### Ethical Decision Making
+- Incorporating ethical constraints
+- Value alignment with human preferences
+- Transparent decision making
+- Accountability in autonomous systems
+
+## Practical Examples
+The DeepMind work on reinforcement learning for robotics demonstrates sophisticated learning in complex environments. The OpenAI Dactyl system shows dexterous manipulation learned through reinforcement learning. The ROS-Industrial initiative provides frameworks for integrating learning with robotic systems.
+
+## Key Takeaways
+- Decision making combines planning, control, and learning
+- Real-time constraints require efficient algorithms
+- Learning from interaction enables adaptation
+- Safety and ethics are critical considerations
+
+## Further Resources
+- "Reinforcement Learning: An Introduction" by Sutton and Barto
+- IEEE Transactions on Robotics special issues on learning
+- Conference on Robot Learning (CoRL) proceedings

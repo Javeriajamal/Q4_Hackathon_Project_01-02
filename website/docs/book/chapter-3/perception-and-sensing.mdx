@@ -1,0 +1,171 @@
+---
+sidebar_position: 1
+title: "Perception and Sensing"
+---
+
+# Perception and Sensing
+
+## Learning Objectives
+- Understand the sensory systems used in humanoid robots
+- Explore perception algorithms for environmental understanding
+- Analyze the integration of multiple sensory modalities
+
+## Introduction
+Perception and sensing form the foundation of a humanoid robot's ability to understand and interact with its environment. These systems enable robots to navigate spaces, recognize objects, understand human intentions, and adapt their behavior based on sensory input. The challenge lies in creating artificial perception systems that approach the robustness and efficiency of human sensory processing.
+
+## Main Content
+
+### Vision Systems
+
+#### Camera Technologies
+Different types of cameras used in humanoid robotics:
+
+**RGB Cameras**
+- Standard color imaging for object recognition
+- Real-time processing capabilities
+- Integration with deep learning models
+- Applications in facial recognition and scene understanding
+
+**Depth Cameras**
+- RGB-D sensors for 3D scene reconstruction
+- Time-of-flight cameras for distance measurement
+- Stereo vision systems for depth estimation
+- Applications in navigation and manipulation
+
+**Event-Based Cameras**
+- Asynchronous pixel updates for dynamic scenes
+- High temporal resolution for fast motion
+- Low latency and low power consumption
+- Emerging technology for dynamic environments
+
+#### Computer Vision Algorithms
+Processing visual information for robotic applications:
+
+**Object Detection and Recognition**
+- Deep learning-based object detection
+- Real-time recognition systems
+- Category-level recognition
+- Instance-specific identification
+
+**Scene Understanding**
+- Semantic segmentation of visual scenes
+- 3D scene reconstruction from images
+- Spatial relationship understanding
+- Dynamic scene analysis
+
+**Visual Tracking**
+- Multiple object tracking
+- Human pose estimation
+- Gaze tracking and attention
+- Visual servoing for manipulation
+
+### Tactile Sensing
+
+#### Tactile Sensor Technologies
+Different approaches to artificial touch:
+
+**Force/Torque Sensors**
+- Measurement of forces at contact points
+- Integration into robot hands and feet
+- Force control for safe interaction
+- Applications in grasping and manipulation
+
+**Tactile Skin**
+- Distributed tactile sensing across surfaces
+- Pressure and texture detection
+- Temperature and slip sensing
+- Bio-inspired tactile sensor arrays
+
+**GelSight Technology**
+- High-resolution tactile imaging
+- Fine texture and geometry detection
+- Applications in robotic manipulation
+- Real-time tactile feedback
+
+### Auditory Perception
+
+#### Microphone Arrays
+- Directional sound capture and localization
+- Noise reduction and speech enhancement
+- Multiple speaker tracking
+- Integration with spatial understanding
+
+#### Speech Processing
+- Automatic speech recognition (ASR)
+- Speaker identification and verification
+- Emotion recognition from voice
+- Natural language understanding
+
+#### Sound Source Localization
+- Acoustic scene analysis
+- Localization of sound sources
+- Integration with visual attention
+- Applications in human-robot interaction
+
+### Proprioceptive Sensing
+
+#### Joint Position Sensing
+- High-resolution encoders for joint angles
+- Absolute vs. incremental position sensing
+- Temperature compensation for accuracy
+- Integration with control systems
+
+#### Inertial Measurement
+- Accelerometers for linear motion detection
+- Gyroscopes for angular velocity measurement
+- Magnetometers for orientation reference
+- Sensor fusion for state estimation
+
+#### Force Sensing
+- Joint torque sensing for control
+- Ground reaction force measurement
+- Contact detection and classification
+- Impedance control applications
+
+### Multi-Modal Sensor Fusion
+
+#### Data Integration Approaches
+- Early fusion: Combining raw sensor data
+- Late fusion: Combining processed outputs
+- Deep fusion: Learning fusion representations
+- Probabilistic fusion methods
+
+#### Kalman Filtering
+- Linear and extended Kalman filters
+- Unscented Kalman filters
+- Particle filters for non-linear systems
+- Applications in state estimation
+
+#### Machine Learning Approaches
+- Deep learning for sensor fusion
+- Attention mechanisms for sensor selection
+- Graph neural networks for multi-sensor data
+- Learning-based fusion strategies
+
+### Environmental Perception
+
+#### 3D Mapping
+- Simultaneous Localization and Mapping (SLAM)
+- Occupancy grid mapping
+- Feature-based mapping
+- Semantic mapping integration
+
+#### Object Recognition in 3D
+- 3D object detection and segmentation
+- Shape and pose estimation
+- Object affordance recognition
+- Scene understanding in 3D space
+
+## Practical Examples
+The Pepper robot by SoftBank demonstrates sophisticated multimodal perception with its cameras, microphones, and touch sensors. The NAO robot includes cameras, microphones, and various sensors for environmental interaction. Advanced research platforms like the iCub robot feature extensive tactile sensing capabilities.
+
+## Key Takeaways
+- Multiple sensor modalities are essential for robust perception
+- Sensor fusion enables more accurate environmental understanding
+- Real-time processing requirements challenge perception systems
+- Bio-inspired approaches inform sensor design and algorithms
+
+## Further Resources
+- "Probabilistic Robotics" by Sebastian Thrun et al.
+- Computer Vision and Pattern Recognition (CVPR) conference proceedings
+- IEEE Transactions on Robotics special issues on perception
