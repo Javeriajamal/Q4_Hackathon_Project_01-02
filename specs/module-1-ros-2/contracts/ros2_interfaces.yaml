@@ -1,0 +1,155 @@
+# ROS 2 Interface Contracts for Module 1
+
+## Overview
+This document defines the ROS 2 interfaces (messages, services, actions) that will be demonstrated in Module 1 of the Physical AI & Humanoid Robotics textbook. These interfaces serve as contracts between different ROS 2 nodes that students will implement.
+
+## Message Definitions
+
+### Basic Messages
+These are standard ROS 2 messages that will be used throughout the examples:
+
+#### std_msgs/String
+- **Purpose**: Simple string communication between nodes
+- **Fields**:
+  - `data: string` - The string message content
+- **Usage**: Basic publisher-subscriber examples
+
+#### std_msgs/Int32, Float32, Bool
+- **Purpose**: Basic data type communication
+- **Usage**: Simple value passing between nodes
+
+### Custom Messages for Humanoid Robotics
+These are example custom messages that students will learn to create:
+
+#### HumanoidJointState
+- **Purpose**: Represent joint states for humanoid robots
+- **Fields**:
+  - `name: string[]` - Array of joint names
+  - `position: float64[]` - Array of joint positions (radians)
+  - `velocity: float64[]` - Array of joint velocities (rad/s)
+  - `effort: float64[]` - Array of joint efforts (Nm)
+- **Usage**: Communicating joint states in humanoid robot control
+
+#### HumanoidCommand
+- **Purpose**: Command messages for humanoid robot control
+- **Fields**:
+  - `joint_names: string[]` - Array of joint names to control
+  - `target_positions: float64[]` - Array of target positions
+  - `target_velocities: float64[]` - Array of target velocities
+  - `max_efforts: float64[]` - Array of maximum efforts
+- **Usage**: Sending control commands to humanoid robot joints
+
+## Service Definitions
+
+### Basic Services
+Standard ROS 2 services that will be demonstrated:
+
+#### std_srvs/SetBool
+- **Request**: `data: bool` - Boolean value to set
+- **Response**: `success: bool` - Whether the operation succeeded
+- `message: string` - Additional information about the result
+- **Usage**: Simple service examples
+
+### Custom Services for Humanoid Robotics
+
+#### humanoid_robot_services/MoveToPose
+- **Request**:
+  - `target_pose: geometry_msgs/Pose` - Desired end-effector pose
+  - `joint_tolerance: float64` - Tolerance for joint position (default: 0.01)
+  - `timeout: duration` - Maximum time to reach pose (default: 5.0 seconds)
+- **Response**:
+  - `success: bool` - Whether the pose was reached successfully
+  - `final_pose: geometry_msgs/Pose` - Actual final pose achieved
+  - `error_message: string` - Error details if operation failed
+- **Usage**: Service for moving humanoid robot limbs to specific poses
+
+#### humanoid_robot_services/GetJointLimits
+- **Request**:
+  - `joint_names: string[]` - Names of joints to get limits for (empty for all)
+- **Response**:
+  - `joint_names: string[]` - Names of joints
+  - `min_positions: float64[]` - Minimum joint positions
+  - `max_positions: float64[]` - Maximum joint positions
+  - `max_velocities: float64[]` - Maximum joint velocities
+  - `max_efforts: float64[]` - Maximum joint efforts
+- **Usage**: Getting joint limits for safety checking
+
+## Action Definitions
+
+### Custom Actions for Humanoid Robotics
+
+#### humanoid_robot_actions/WalkToGoal
+- **Goal**:
+  - `target_position: geometry_msgs/Point` - Target position to walk to
+  - `target_orientation: geometry_msgs/Quaternion` - Target orientation
+  - `walk_speed: float64` - Desired walking speed (default: 0.5 m/s)
+- **Feedback**:
+  - `current_position: geometry_msgs/Point` - Current position
+  - `distance_remaining: float64` - Distance to goal
+  - `status: string` - Current walking status
+- **Result**:
+  - `success: bool` - Whether the goal was reached
+  - `final_position: geometry_msgs/Point` - Final achieved position
+  - `error_code: int8` - Error code if failed (0=success, 1=timeout, 2=collision)
+- **Usage**: Complex walking action for humanoid robots
+
+#### humanoid_robot_actions/ExecuteMotion
+- **Goal**:
+  - `motion_name: string` - Name of predefined motion to execute
+  - `motion_sequence: HumanoidCommand[]` - Sequence of commands for custom motion
+  - `execution_speed: float64` - Speed multiplier for motion (default: 1.0)
+- **Feedback**:
+  - `current_step: int32` - Current step in motion sequence
+  - `total_steps: int32` - Total steps in motion sequence
+  - `current_joint_state: HumanoidJointState` - Current joint state
+- **Result**:
+  - `success: bool` - Whether the motion was completed successfully
+  - `execution_time: duration` - Time taken to execute motion
+  - `error_message: string` - Error details if motion failed
+- **Usage**: Executing predefined or custom motions on humanoid robots
+
+## Quality of Service (QoS) Profiles
+
+### Publisher QoS Profiles
+- **Reliable**: For critical control messages where no data loss is acceptable
+- **Best Effort**: For sensor data where some loss is acceptable but low latency is important
+- **Transient Local**: For initial state messages that late-joining subscribers need to receive
+
+### Subscriber QoS Profiles
+- **Reliable**: For critical control subscribers that must receive all messages
+- **Best Effort**: For real-time sensor data subscribers
+- **Volatile**: For high-frequency data where only the most recent value matters
+
+## Naming Conventions
+
+### Topic Names
+- Use forward slashes to separate hierarchical components
+- Use lowercase with underscores for multi-word names
+- Examples: `/humanoid/joint_states`, `/humanoid/left_arm/command`
+
+### Service Names
+- Use forward slashes to separate hierarchical components
+- Use lowercase with underscores for multi-word names
+- Examples: `/humanoid/get_joint_limits`, `/humanoid/move_to_pose`
+
+### Action Names
+- Use forward slashes to separate hierarchical components
+- Use lowercase with underscores for multi-word names
+- Examples: `/humanoid/walk_to_goal`, `/humanoid/execute_motion`
+
+## Validation Rules
+
+### Message Validation
+- All custom messages must have clear, descriptive field names
+- Message fields must have appropriate data types for the intended use
+- Messages must include appropriate units in comments where applicable
+
+### Service Validation
+- Service requests and responses must be well-defined and complete
+- Services should include appropriate error handling information
+- Service interfaces should be designed for ease of use by students
+
+### Action Validation
+- Action goals, feedback, and results must be clearly defined
+- Actions should include appropriate status reporting
+- Action interfaces should support cancellation and preemption where appropriate
