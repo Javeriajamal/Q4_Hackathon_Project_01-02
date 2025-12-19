@@ -1,0 +1,218 @@
+/* =========================
+   DOCS / MODULE PAGES
+========================= */
+
+/* Docs background */
+.theme-doc-markdown {
+  color: #e6e9f0;
+}
+
+/* Headings */
+.theme-doc-markdown h1,
+.theme-doc-markdown h2,
+.theme-doc-markdown h3 {
+  background: linear-gradient(90deg, #4facfe, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sidebar */
+.menu {
+  background: #05080f;
+}
+
+.menu__link {
+  color: #cbd5f5;
+  border-radius: 8px;
+  margin: 2px 6px;
+}
+
+.menu__link:hover {
+  background: rgba(79, 172, 254, 0.15);
+  color: #00c6ff;
+}
+
+.menu__link--active {
+  background: rgba(79, 172, 254, 0.35);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Navbar */
+.navbar {
+  background: transparent ;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.navbar__title:hover {
+  color: #00b4ff;
+}
+
+.navbar__logo:hover {
+  color: #00b4ff ;
+}
+
+.navbar__logo img {
+  width: 45px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.navbar__brand {
+  border-radius: 50%;
+}
+
+.navbar__item {
+  color: #cbd5f5;
+}
+
+.navbar__item:hover {
+  color: #00b4ff;
+}
+
+/* TOC */
+.table-of-contents__link {
+  color: #9aa8ff;
+}
+
+.table-of-contents__link--active {
+  color: #4facfe;
+  font-weight: 600;
+}
+
+/* Pagination */
+.pagination-nav__link {
+  background: #0b1020;
+  border-radius: 12px;
+  border: 1px solid rgba(79, 172, 254, 0.25);
+}
+
+.pagination-nav__link:hover {
+  box-shadow: 0 0 18px rgba(79, 172, 254, 0.5);
+}
+
+
+/* =========================
+   FOOTER (DOCUSAURUS)
+========================= */
+
+.footer {
+  background: linear-gradient(180deg, #05080f, #02040a);
+  color: #cbd5f5;
+  border-top: 1px solid rgba(79, 172, 254, 0.15);
+  padding-top: 80px;
+  text-align:center;
+
+}
+
+.footer__title {
+  color: #00b4ff /*ffffff*/;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.footer__item {
+  color: #9aa8ff;
+  transition: color 0.2s ease;
+}
+
+.footer__item:hover {
+  color: #4facfe;
+  text-decoration: none;
+}
+
+.footer__link-item {
+  color: #9ca1c0;
+}
+
+.footer__link-item:hover {
+  color: #00b4ff;
+}
+
+.footer__copyright {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #e7ecee /*7f8cff*/;
+  text-align: center;
+}
+
+/* Footer logo */
+.footer__logo {
+  filter: drop-shadow(0 0 10px rgba(79, 172, 254, 0.4));
+}
+
+/* Footer bottom bar */
+.footer__bottom {
+  border-top: 1px solid rgba(79, 172, 254, 0.12);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Tablet: max-width 1024px */
+@media screen and (max-width: 1024px) {
+  .theme-doc-markdown {
+    padding: 1rem 1.5rem;
+  }
+
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .menu__link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .footer {
+    padding: 3rem 1.5rem 2rem;
+  }
+}
+
+/* Mobile: max-width 768px */
+@media screen and (max-width: 768px) {
+  .theme-doc-markdown {
+    padding: 1rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .menu {
+    padding: 0.5rem 0;
+  }
+
+  .menu__link {
+    margin: 2px 0;
+  }
+
+  .navbar__logo img {
+    width: 35px;
+  }
+
+  .footer__title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Small Mobile: max-width 480px */
+@media screen and (max-width: 480px) {
+  .theme-doc-markdown {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .navbar__logo img {
+    width: 30px;
+  }
+
+  .footer {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .footer__title {
+    font-size: 1rem;
+  }
+}
