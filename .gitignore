@@ -2,4 +2,10 @@ node_modules
 .docusaurus
 build
 .env
-
+settings.local.json
+nul
+start-dev.sh
+CLAUDE.md
+requirements_backeup.txt
+start-dev.bat
+tests

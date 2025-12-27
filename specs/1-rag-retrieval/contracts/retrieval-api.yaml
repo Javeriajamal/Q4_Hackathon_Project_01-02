@@ -1,0 +1,308 @@
+openapi: 3.0.0
+info:
+  title: RAG Content Retrieval API
+  description: API for retrieving relevant content chunks from the RAG system using semantic similarity search
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.physicalairobotics.com
+    description: Production server
+
+paths:
+  /api/retrieve:
+    post:
+      summary: Retrieve relevant content chunks for a query
+      description: Converts a natural language query to embeddings and performs semantic similarity search against stored content
+      operationId: retrieveContent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrievalRequest'
+      responses:
+        '200':
+          description: Successfully retrieved relevant content chunks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrievalResponse'
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - Retrieval
+
+  /api/validate-retrieval:
+    post:
+      summary: Validate retrieval quality
+      description: Submit a query with expected results to validate retrieval quality metrics
+      operationId: validateRetrieval
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidationRequest'
+      responses:
+        '200':
+          description: Retrieval quality metrics calculated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+        '400':
+          description: Invalid validation parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - Validation
+
+tags:
+  - name: Retrieval
+    description: Content retrieval operations
+  - name: Validation
+    description: Retrieval quality validation operations
+
+components:
+  schemas:
+    RetrievalRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Natural language query text
+          example: "What is digital twin simulation?"
+          minLength: 1
+          maxLength: 500
+        top_k:
+          type: integer
+          description: Number of results to return
+          default: 5
+          minimum: 1
+          maximum: 20
+          example: 5
+        min_relevance:
+          type: number
+          description: Minimum relevance threshold for results
+          default: 0.3
+          minimum: 0.0
+          maximum: 1.0
+          example: 0.3
+        query_types:
+          type: array
+          description: Types of queries to prioritize
+          items:
+            type: string
+            enum: [conceptual, factual, section-based]
+          example: ["conceptual", "factual"]
+
+    RetrievalResponse:
+      type: object
+      required:
+        - results
+        - query_embedding_time
+        - search_time
+        - total_time
+        - retrieval_count
+        - query_text
+      properties:
+        results:
+          type: array
+          description: Ranked list of retrieved content chunks
+          items:
+            $ref: '#/components/schemas/RetrievalResult'
+          example:
+            - chunk_id: 123456789
+              content: "Digital twin simulation is a virtual representation of a physical system..."
+              relevance_score: 0.85
+              metadata:
+                source_url: "https://physicalairobotics.netlify.app/docs/module-2-digital-twin-simulation/chapter-1-introduction-to-digital-twins"
+                section_title: "Introduction to Digital Twins"
+                chunk_index: 2
+              rank: 1
+        query_embedding_time:
+          type: number
+          description: Time taken to generate query embedding (seconds)
+          example: 0.12
+        search_time:
+          type: number
+          description: Time taken for vector search (seconds)
+          example: 0.23
+        total_time:
+          type: number
+          description: Total processing time (seconds)
+          example: 0.35
+        retrieval_count:
+          type: integer
+          description: Number of chunks returned
+          example: 5
+        query_text:
+          type: string
+          description: The original query that was processed
+          example: "What is digital twin simulation?"
+
+    RetrievalResult:
+      type: object
+      required:
+        - chunk_id
+        - content
+        - relevance_score
+        - metadata
+        - rank
+      properties:
+        chunk_id:
+          type: string
+          description: Unique identifier for the content chunk
+          example: "123456789"
+        content:
+          type: string
+          description: The retrieved text content
+          example: "Digital twin simulation is a virtual representation of a physical system that enables real-time monitoring, analysis, and optimization of the physical counterpart."
+        relevance_score:
+          type: number
+          description: Similarity score between query and chunk (0.0-1.0)
+          minimum: 0.0
+          maximum: 1.0
+          example: 0.85
+        metadata:
+          $ref: '#/components/schemas/ChunkMetadata'
+        rank:
+          type: integer
+          description: Position in the ranked results list (1-based)
+          example: 1
+
+    ChunkMetadata:
+      type: object
+      required:
+        - source_url
+        - section_title
+        - chunk_index
+      properties:
+        source_url:
+          type: string
+          description: Original document URL
+          format: uri
+          example: "https://physicalairobotics.netlify.app/docs/module-2-digital-twin-simulation/chapter-1-introduction-to-digital-twins"
+        section_title:
+          type: string
+          description: Title of the section containing the chunk
+          example: "Introduction to Digital Twins"
+        chunk_index:
+          type: integer
+          description: Position of chunk in original document
+          example: 2
+
+    ValidationRequest:
+      type: object
+      required:
+        - query
+        - expected_chunks
+      properties:
+        query:
+          type: string
+          description: Natural language query text for validation
+          example: "What is ROS2?"
+          minLength: 1
+          maxLength: 500
+        expected_chunks:
+          type: array
+          description: Expected relevant chunk IDs for the query
+          items:
+            type: string
+          example: ["987654321", "111222333"]
+        top_k:
+          type: integer
+          description: Number of results to consider for validation
+          default: 5
+          minimum: 1
+          maximum: 20
+          example: 5
+
+    ValidationResponse:
+      type: object
+      required:
+        - precision
+        - recall
+        - f1_score
+        - retrieved_chunks
+        - relevant_retrieved
+        - validation_time
+      properties:
+        precision:
+          type: number
+          description: Precision score for the retrieval
+          minimum: 0.0
+          maximum: 1.0
+          example: 0.8
+        recall:
+          type: number
+          description: Recall score for the retrieval
+          minimum: 0.0
+          maximum: 1.0
+          example: 0.75
+        f1_score:
+          type: number
+          description: F1 score combining precision and recall
+          minimum: 0.0
+          maximum: 1.0
+          example: 0.77
+        retrieved_chunks:
+          type: array
+          description: IDs of chunks that were retrieved
+          items:
+            type: string
+          example: ["987654321", "444555666", "777888999"]
+        relevant_retrieved:
+          type: integer
+          description: Number of relevant chunks that were retrieved
+          example: 3
+        validation_time:
+          type: number
+          description: Time taken to perform validation (seconds)
+          example: 0.45
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error type
+          example: "invalid_query"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Query must be between 1 and 500 characters"
+        details:
+          type: object
+          description: Additional error details (optional)
+          example: {"field": "query", "value": ""}

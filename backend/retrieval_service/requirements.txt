@@ -1,0 +1,18 @@
+# Core dependencies (already in pyproject.toml but listed here for clarity)
+cohere>=5.20.1
+qdrant-client>=1.16.2
+python-dotenv>=1.2.1
+requests>=2.32.5
+beautifulsoup4>=4.14.3
+lxml>=6.0.2
+
+# API framework
+fastapi>=0.104.1
+uvicorn>=0.24.0
+
+# Testing
+pytest>=7.4.3
+pytest-asyncio>=0.21.1
+
+# Type hints
+typing-extensions>=4.8.0

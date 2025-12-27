@@ -1,0 +1,109 @@
+# Deployment configuration for RAG Content Retrieval Service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-retrieval-service
+  labels:
+    app: rag-retrieval-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rag-retrieval-service
+  template:
+    metadata:
+      labels:
+        app: rag-retrieval-service
+    spec:
+      containers:
+      - name: rag-retrieval-service
+        image: rag-retrieval-service:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: COHERE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: cohere-api-key
+        - name: QDRANT_URL
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: qdrant-url
+        - name: QDRANT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: qdrant-api-key
+        - name: COLLECTION_NAME
+          value: "rag_embedding"
+        - name: DEFAULT_TOP_K
+          value: "5"
+        - name: DEFAULT_MIN_RELEVANCE
+          value: "0.3"
+        - name: HOST
+          value: "0.0.0.0"
+        - name: PORT
+          value: "8000"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+---
+# Service definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-retrieval-service
+  labels:
+    app: rag-retrieval-service
+spec:
+  selector:
+    app: rag-retrieval-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer
+
+---
+# ConfigMap for application settings
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rag-config
+data:
+  LOG_LEVEL: "INFO"
+  MAX_QUERY_LENGTH: "500"
+  MAX_TOP_K: "20"
+  MAX_WORKERS: "4"
+  TIMEOUT_SECONDS: "30"
+
+---
+# Secret example (values should be base64 encoded in real deployment)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rag-secrets
+type: Opaque
+data:
+  cohere-api-key: <base64-encoded-value>
+  qdrant-url: <base64-encoded-value>
+  qdrant-api-key: <base64-encoded-value>

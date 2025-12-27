@@ -50,7 +50,7 @@ const config = {
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css',
       type: 'text/css',
-      integrity: 'sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4umQbY6jYiZq14wTIFTGi8fA1o3ic5C',
+      /*integrity: 'sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4umQbY6jYiZq14wTIFTGi8fA1o3ic5C',*/
       crossorigin: 'anonymous',
     },
   ],
